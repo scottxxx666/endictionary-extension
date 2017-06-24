@@ -14,7 +14,7 @@
 }(document, 'script', 'Messenger'));
 </script>
     Hello~
-    <button onclick="fbShare">share</button>
+    <button onclick="fbShare()">share</button>
 <script>
     window.extAsyncInit = function() {
         // the Messenger Extensions JS SDK is done loading
@@ -31,11 +31,11 @@
                  subtitle: "My result: Fez",
                  default_action: {
                      type:"web_url",
-                     url: "https://scottxxx666.github.io/endictionary-extension/",
+                     url: "https://bot.peters-hats.com/view_quiz_results.php?user=24601",
                  },
                  buttons: [{
                      type:"web_url",
-                     url:"https://scottxxx666.github.io/endictionary-extension/",
+                     url:"https://bot.peters-hats.com/hatquiz.php?referer=24601",
                      title:"Take the Quiz",
                  }],
              }]
@@ -57,7 +57,7 @@
 
         }, function error(errorCode, errorMessage) {
         // An error occurred in the process
-            alert(errorMessage);
+
         },
         messageToShare,
         "current_thread");
