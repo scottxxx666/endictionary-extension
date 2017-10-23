@@ -14,13 +14,10 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 </script>
-    Hello~
-    <!-- <button onclick="fbShare()">share</button> -->
-
     <input id="query">
     <button id="search">搜尋</button>
-    <div>
-        <div id="result"></div>
+    <div id="result">
+        <div id="search_result"></div>
         <button id="share_btn">share to messanger</button>
     </div>
 <script>
@@ -63,7 +60,7 @@
         });
     }
 
-    var result = document.getElementById('result');
+    var result = document.getElementById('search_result');
 
     document.querySelector('#search').addEventListener('click', function() {
         const query = document.getElementById('query').value;
