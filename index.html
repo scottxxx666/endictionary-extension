@@ -77,9 +77,9 @@
              payload: {
                  template_type: 'generic',
                  elements: [{
-                     title: "I took Peter's 'Which Hat Are You?' Quiz",
+                     title: searchResult.keyword,
                      image_url: "https://scottxxx666.github.io/endictionary-extension/",
-                     subtitle: "My result: Fez",
+                     subtitle: `${searchResult.kk}\n - ${searchResult.tranlate}`,
                      default_action: {
                          type:"web_url",
                          url: "https://scottxxx666.github.io/endictionary-extension/",
@@ -87,7 +87,7 @@
                      buttons: [{
                          type:"web_url",
                          url:"https://scottxxx666.github.io/endictionary-extension/",
-                         title:"Take the Quiz",
+                         title:"detail",
                      }],
                  }]
              }
