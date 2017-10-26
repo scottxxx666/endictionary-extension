@@ -4,7 +4,6 @@
     <title>查個英文</title>
 </head>
 <body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
 (function(d, s, id){
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -14,18 +13,43 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'Messenger'));
 </script>
-    <input id="query">
-    <button id="search">搜尋</button>
-    <div id="result">
-        <div id="search_result"></div>
-        <button id="share_btn">share to messanger</button>
+<style type="text/css">
+    body {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        /*min-height: 100vh;*/
+    }
+    #search_form {
+        width: 80vw;
+    }
+
+    #query, #search, #result, #share_btn {
+        font-size: 100%;
+        width: 100%;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: 20vh;
+        text-align: center;
+    }
+</style>
+    <div id="search_form">
+        <input id="query">
+        <button id="search">搜尋</button>
+        <div id="result">
+            <div id="search_result"></div>
+            <button id="share_btn">share to messanger</button>
+        </div>
     </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     window.extAsyncInit = function() {
         // the Messenger Extensions JS SDK is done loading
     };
 
     var searchResult;
+    var shareText;
+    var shareUrl;
 
     var fbShare = function fbShare (messageToShare) {
         MessengerExtensions.beginShareFlow(function success(response) {
@@ -56,8 +80,10 @@
             const response =
 `<div>${data.keyword}</div>
 <div>${data.kk}</div>
-<div>${data.text}</div>`;
+<div>${data.tranlate}</div>`;
             result.innerHTML = response;
+            shareText = `${data.keyword}\n - ${data.kk}\n - ${data.tranlate}`;
+            shareUrl = `http://www.iciba.com/${data.keyword}`;
         });
     }
 
@@ -73,21 +99,30 @@
           attachment: {
              type: "template",
              payload: {
-                 template_type: 'generic',
-                 elements: [{
-                     title: searchResult.keyword,
-                     image_url: "https://scottxxx666.github.io/endictionary-extension/",
-                     subtitle: `${searchResult.kk}\n - ${searchResult.text}`,
-                     default_action: {
-                         type:"web_url",
-                         url: "https://scottxxx666.github.io/endictionary-extension/",
-                     },
-                     buttons: [{
-                         type:"web_url",
-                         url:"https://scottxxx666.github.io/endictionary-extension/",
-                         title:"detail",
-                     }],
-                 }]
+                template_type: "button",
+                text: shareText,
+                buttons:[
+                    {
+                        type: "web_url",
+                        url: url,
+                        title: "詳細資料"
+                    }
+                ]
+                 // template_type: 'generic',
+                 // elements: [{
+                 //     title: searchResult.keyword,
+                 //     image_url: "https://scottxxx666.github.io/endictionary-extension/",
+                 //     subtitle: `${searchResult.kk}\n - ${searchResult.text}`,
+                 //     default_action: {
+                 //         type:"web_url",
+                 //         url: "https://scottxxx666.github.io/endictionary-extension/",
+                 //     },
+                 //     buttons: [{
+                 //         type:"web_url",
+                 //         url:"https://scottxxx666.github.io/endictionary-extension/",
+                 //         title:"detail",
+                 //     }],
+                 // }]
              }
           }
         };
