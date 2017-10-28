@@ -96,49 +96,26 @@
 
     document.querySelector('#share_btn').addEventListener('click', function() {
         var messageToShare = {
-        attachment:{
-            type:"template",
-            payload:{
-                template_type:"button",
-                text:"What do you want to do next?",
-                buttons:[
-                  {
-                    "type":"web_url",
-                    "url":"https://www.messenger.com",
-                    "title":"Visit Messenger"
-                  }
-                ]
-              }
-            }
-          // attachment: {
-          //    type: "template",
-          //    payload: {
-          //       template_type: "button",
-          //       text: shareText,
-          //       buttons:[
-          //           {
-          //               type: "web_url",
-          //               url: shareUrl,
-          //               title: "詳細資料"
-          //           }
-          //       ]
-          //        // template_type: 'generic',
-          //        // elements: [{
-          //        //     title: searchResult.keyword,
-          //        //     image_url: "https://scottxxx666.github.io/endictionary-extension/",
-          //        //     subtitle: `${searchResult.kk}\n - ${searchResult.text}`,
-          //        //     default_action: {
-          //        //         type:"web_url",
-          //        //         url: "https://scottxxx666.github.io/endictionary-extension/",
-          //        //     },
-          //        //     buttons: [{
-          //        //         type:"web_url",
-          //        //         url:"https://scottxxx666.github.io/endictionary-extension/",
-          //        //         title:"detail",
-          //        //     }],
-          //        // }]
-          //    }
-          // }
+          attachment: {
+             type: "template",
+             payload: {
+                 template_type: 'generic',
+                 elements: [{
+                     title: searchResult.keyword,
+                     image_url: "https://scottxxx666.github.io/endictionary-extension/mark",
+                     subtitle: `${searchResult.kk}\n - ${searchResult.tranlate}`,
+                     default_action: {
+                         type:"web_url",
+                         url: "https://scottxxx666.github.io/endictionary-extension/",
+                     },
+                     buttons: [{
+                         type:"web_url",
+                         url:"https://scottxxx666.github.io/endictionary-extension/",
+                         title:"detail",
+                     }],
+                 }]
+             }
+          }
         };
         fbShare(messageToShare);
     });
