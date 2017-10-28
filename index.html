@@ -32,6 +32,10 @@
         height: 10vh;
         text-align: center;
     }
+
+    #result {
+        display: none;
+    }
 </style>
     <div id="search_form">
         <input id="query">
@@ -75,19 +79,31 @@
     var search = function startQuery (query) {
         $.get('https://mbzxexz92l.execute-api.ap-northeast-1.amazonaws.com/production/english', {query: query})
         .done(function(data) {
-            console.log(data);
             searchResult = data;
-            const response =
-`<div>${data.keyword}</div>
-<div>${data.kk}</div>
-<div>${data.tranlate}</div>`;
-            result.innerHTML = response;
             shareText = `${data.keyword}\n - ${data.kk}\n - ${data.tranlate}`;
             shareUrl = `http://www.iciba.com/${data.keyword}`;
+            showResult(data);
         });
     }
 
-    var result = document.getElementById('search_result');
+    var showResult = function showResult (data) {
+        console.log(data);
+        const response =
+`<div>${data.keyword}</div>
+<div>${data.kk}</div>
+<div>${data.tranlate}</div>`;
+        if (data.keyword === undefined) {
+            searchResultDiv.innerHTML = '查不到耶';
+            share_btn.style.display = 'none';
+        } else {
+            searchResultDiv.innerHTML = response;
+            share_btn.style.display = 'block';
+        }
+        result.style.display = 'block';
+    }
+
+    var searchResultDiv = document.getElementById('search_result');
+    var result = document.getElementById('result');
 
     document.querySelector('#search').addEventListener('click', function() {
         const query = document.getElementById('query').value;
